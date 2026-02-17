@@ -18,6 +18,21 @@
       <!-- Recipe cards will be rendered here by JavaScript -->
     </div>
   </main>
+  <div id="filters">
+  <button data-filter="ALL">All Recipes</button>
+  <button data-filter="EASY">Easy</button>
+  <button data-filter="MEDIUM">Medium</button>
+  <button data-filter="HARD">Hard</button>
+  <button data-filter="QUICK">Quick (Under 30 mins)</button>
+</div>
+
+<div id="sort">
+  <button data-sort="NAME">Name (A–Z)</button>
+  <button data-sort="TIME">Time (Fastest First)</button>
+</div>
+
+<div id="recipe-list"></div>
+
 
   <script src="app.js"></script>
 </body>

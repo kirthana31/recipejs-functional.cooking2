@@ -55,3 +55,65 @@ const renderRecipes = (recipesArray) => {
 // ==========================
 
 renderRecipes(recipes);
+let currentFilter = "ALL";
+let currentSort = null;
+
+const filterRecipes = (recipes, filter) => {
+  switch (filter) {
+    case "EASY":
+      return recipes.filter(r => r.difficulty === "Easy");
+
+    case "MEDIUM":
+      return recipes.filter(r => r.difficulty === "Medium");
+
+    case "HARD":
+      return recipes.filter(r => r.difficulty === "Hard");
+
+    case "QUICK":
+      return recipes.filter(r => r.time < 30);
+
+    default:
+      return recipes;
+  }
+};
+
+const sortRecipes = (recipes, sortType) => {
+  const sorted = [...recipes]; // copy → avoid mutation
+
+  if (sortType === "NAME") {
+    return sorted.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  if (sortType === "TIME") {
+    return sorted.sort((a, b) => a.time - b.time);
+  }
+
+  return sorted;
+};
+
+const updateDisplay = () => {
+  let result = filterRecipes(recipes, currentFilter);
+  result = sortRecipes(result, currentSort);
+  renderRecipes(result);
+};
+
+
+
+
+document.querySelectorAll("#filters button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentFilter = btn.dataset.filter;
+    updateDisplay();
+  });
+});
+
+document.querySelectorAll("#sort button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentSort = btn.dataset.sort;
+    updateDisplay();
+  });
+});
+
+updateDisplay();
+
+
